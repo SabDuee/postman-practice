@@ -1,0 +1,280 @@
+{
+	"info": {
+		"_postman_id": "34d9aeb1-dd8d-4819-82f1-38f719ed9eb9",
+		"name": "Pokemons",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42352399",
+		"_collection_link": "https://www.postman.com/science-technologist-17160283/workspace/test1/collection/42352399-34d9aeb1-dd8d-4819-82f1-38f719ed9eb9?action=share&source=collection_link&creator=42352399"
+	},
+	"item": [
+		{
+			"name": "Create new Pokemon",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200 or 201\", function () {\r",
+							"    pm.expect([200, 201]).to.include(pm.response.code);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response contains id and name\", function () {\r",
+							"    pm.expect(response).to.have.property(\"id\");\r",
+							"    pm.expect(response).to.have.property(\"name\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"createdPokemonId\", response.id);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 228,\r\n  \"category\": {\r\n    \"id\": 0,\r\n    \"name\": \"string\"\r\n  },\r\n  \"name\": \"Bandit228\",\r\n  \"photoUrls\": [\r\n    \"string\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 0,\r\n      \"name\": \"string\"\r\n    }\r\n  ],\r\n  \"status\": \"avaliable\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/pet",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"pet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Pokemon Askibidi",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Response has correct fields\", function () {\r",
+							"    pm.expect(response).to.have.property(\"id\");\r",
+							"    pm.expect(response).to.have.property(\"name\");\r",
+							"    pm.expect(response).to.have.property(\"status\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/pet/{{pokemonIDAskibidi}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"pet",
+						"{{pokemonIDAskibidi}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Pokemon by status",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Response is an array\", function () {\r",
+							"    pm.expect(response).to.be.an(\"array\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"At least one Pokémon is available\", function () {\r",
+							"    const hasAvailable = response.some(pet => pet.status === \"available\");\r",
+							"    pm.expect(hasAvailable).to.be.true;\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/pet/findByStatus?status=avaliable",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"pet",
+						"findByStatus"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "avaliable"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Pokemon Skebob",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Response has correct fields\", function () {\r",
+							"    pm.expect(response).to.have.property(\"id\");\r",
+							"    pm.expect(response).to.have.property(\"name\");\r",
+							"    pm.expect(response).to.have.property(\"status\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/pet/{{pokemonIDSkebob}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"pet",
+						"{{pokemonIDSkebob}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdatePokInfo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Name was updated\", function () {\r",
+							"    pm.expect(response.name).to.eql(\"Skebob\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status is still available\", function () {\r",
+							"    pm.expect(response.status).to.eql(\"available\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 2222,\r\n  \"category\": {\r\n    \"id\": 0,\r\n    \"name\": \"string\"\r\n  },\r\n  \"name\": \"Skebob\",\r\n  \"photoUrls\": [\r\n    \"string\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 0,\r\n      \"name\": \"string\"\r\n    }\r\n  ],\r\n  \"status\": \"avaliable\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/pet",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"pet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Pet",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200 or 204\", function () {\r",
+							"    pm.expect([200, 204]).to.include(pm.response.code);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/pet/{{Bandit228}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"pet",
+						"{{Bandit228}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
